@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("stm32l496zgtp-serial-test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bd5b89a7ac0b93595d6093db51b10ac230b341e")]
 [assembly: System.Reflection.AssemblyProductAttribute("stm32l496zgtp-serial-test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("stm32l496zgtp-serial-test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

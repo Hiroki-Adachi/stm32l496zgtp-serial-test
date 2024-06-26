@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Style Guide: https://google.github.io/styleguide/csharp-style.html
+
+using System;
 using System.IO.Ports;
 using System.Threading.Tasks;
 
@@ -6,14 +8,14 @@ namespace STM32SerialCommunication
 {
   class Program
   {
-    static SerialPort? serialPort;
-    static string buffer = string.Empty;
+    static SerialPort? _serialPort;
+    static string _buffer = string.Empty;
 
     static void Main(string[] args)
     {
-      serialPort = new SerialPort
+      _serialPort = new SerialPort
       {
-        PortName = "/dev/tty.usbserial-AU06JCS7", // 使用するポート名に置き換えてください
+        PortName = "/dev/tty.usbserial-AU06JCS7",
         BaudRate = 115200,
         Parity = Parity.None,
         DataBits = 8,
@@ -23,11 +25,11 @@ namespace STM32SerialCommunication
         WriteTimeout = 500
       };
 
-      serialPort.DataReceived += SerialPort_DataReceived;
+      _serialPort.DataReceived += SerialPortDataReceived;
 
       try
       {
-        serialPort.Open();
+        _serialPort.Open();
         Console.WriteLine("Port opened successfully!");
 
         while (true)
@@ -37,16 +39,13 @@ namespace STM32SerialCommunication
 
           if (input.Equals("ESC", StringComparison.OrdinalIgnoreCase))
           {
-            // 'ESC'と入力された場合、ESCキーの制御文字（ASCII 27）を送信
-            serialPort.Write(new byte[] { 27 }, 0, 1);
+            _serialPort.Write(new byte[] { 27 }, 0, 1);
             Console.WriteLine("ESC key sent successfully!");
           }
           else
           {
             if (input == "end") break;
-
-            // メッセージの末尾にキャリッジリターンを追加
-            serialPort.Write(input + "\r");
+            _serialPort.Write(input + "\r");
             Console.WriteLine("Data sent successfully!");
           }
         }
@@ -57,15 +56,15 @@ namespace STM32SerialCommunication
       }
       finally
       {
-        if (serialPort.IsOpen)
+        if (_serialPort.IsOpen)
         {
-          serialPort.Close();
+          _serialPort.Close();
           Console.WriteLine("Port closed successfully!");
         }
       }
     }
 
-    private static async void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+    private static async void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
     {
       try
       {
@@ -73,20 +72,18 @@ namespace STM32SerialCommunication
         {
           try
           {
-            return serialPort.ReadExisting();
+            return _serialPort.ReadExisting();
           }
           catch (TimeoutException tex)
           {
             Console.WriteLine($"Timeout Error: {tex.Message}");
-            return string.Empty; // タイムアウトの場合は空の文字列を返す
+            return string.Empty;
           }
         });
 
         if (!string.IsNullOrEmpty(receivedData))
         {
-          buffer += receivedData;
-
-          // 受信データを処理する
+          _buffer += receivedData;
           ProcessReceivedData();
         }
       }
@@ -98,23 +95,23 @@ namespace STM32SerialCommunication
 
     private static void ProcessReceivedData()
     {
-      while (buffer.Contains("\r") | buffer.Contains(">"))
+      while (_buffer.Contains("\r") | _buffer.Contains(">"))
       {
         int index;
-        if (!buffer.Contains("\r"))
+        if (!_buffer.Contains("\r"))
         {
-          index = buffer.IndexOf(">");
+          index = _buffer.IndexOf(">");
         }
         else
         {
-          index = buffer.IndexOf("\r");
+          index = _buffer.IndexOf("\r");
         }
 
-        string completeMessage = buffer.Substring(0, index + 1);
-        buffer = buffer.Substring(index + 1);
+        string completeMessage = _buffer.Substring(0, index + 1);
+        _buffer = _buffer.Substring(index + 1);
 
-        // 受信データの処理例
         Console.OutputEncoding = System.Text.Encoding.UTF8;
+        // completeMessage = completeMessage.Replace('?', '@');
         Console.Write($"{completeMessage}");
       }
     }
