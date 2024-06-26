@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "DBj4lexvkM4=",
+  "success": true,
+  "projectFilePath": "/Users/adachihiroki/github/stm32l496zgtp-serial-test/stm32l496zgtp-serial-test.csproj",
+  "expectedPackageFiles": [
+    "/Users/adachihiroki/.nuget/packages/runtime.linux-arm.runtime.native.system.io.ports/8.0.0/runtime.linux-arm.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "/Users/adachihiroki/.nuget/packages/runtime.linux-arm64.runtime.native.system.io.ports/8.0.0/runtime.linux-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "/Users/adachihiroki/.nuget/packages/runtime.linux-x64.runtime.native.system.io.ports/8.0.0/runtime.linux-x64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "/Users/adachihiroki/.nuget/packages/runtime.native.system.io.ports/8.0.0/runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "/Users/adachihiroki/.nuget/packages/runtime.osx-arm64.runtime.native.system.io.ports/8.0.0/runtime.osx-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "/Users/adachihiroki/.nuget/packages/runtime.osx-x64.runtime.native.system.io.ports/8.0.0/runtime.osx-x64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "/Users/adachihiroki/.nuget/packages/system.io.ports/8.0.0/system.io.ports.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
